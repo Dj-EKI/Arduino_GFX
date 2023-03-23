@@ -282,12 +282,14 @@ public:
     @brief  Set text cursor location
     @param  x    X coordinate in pixels
     @param  y    Y coordinate in pixels
+    @param  fixedX    After /n or /r its jump to fixed X
   */
   /**********************************************************************/
-  void setCursor(int16_t x, int16_t y)
+  void setCursor(int16_t x, int16_t y,int16_t fixedX = 0)
   {
     cursor_x = x;
     cursor_y = y;
+    fixed_X = fixedX;
   }
 
   /**********************************************************************/
@@ -389,7 +391,8 @@ protected:
       _max_x,   ///< x zero base bound (_width - 1)
       _max_y,   ///< y zero base bound (_height - 1)
       cursor_x, ///< x location to start print()ing text
-      cursor_y; ///< y location to start print()ing text
+      cursor_y, ///< y location to start print()ing text
+      fixed_X;
   uint16_t
       textcolor,   ///< 16-bit background color for print()
       textbgcolor; ///< 16-bit text color for print()
