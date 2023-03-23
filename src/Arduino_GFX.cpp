@@ -2080,7 +2080,7 @@ size_t Arduino_GFX::write(uint8_t c)
   {
     if (c == '\n')
     {
-      cursor_x = 0;
+      cursor_x = fixed_X;
       cursor_y += (int16_t)textsize_y *
                   (uint8_t)pgm_read_byte(&gfxFont->yAdvance);
     }
@@ -2094,7 +2094,7 @@ size_t Arduino_GFX::write(uint8_t c)
         // int16_t xo = (int8_t)pgm_read_byte(&glyph->xOffset); // sic
         if (wrap && ((cursor_x + (textsize_x * w) - 1) > _max_x))
         {
-          cursor_x = 0;
+          cursor_x = fixed_X;
           cursor_y += (int16_t)textsize_y *
                       (uint8_t)pgm_read_byte(&gfxFont->yAdvance);
         }
@@ -2159,7 +2159,7 @@ size_t Arduino_GFX::write(uint8_t c)
     {
       if (_encoding == '\n')
       {
-        cursor_x = 0;
+        cursor_x = fixed_X;
         cursor_y += (int16_t)textsize_y * _u8g2_max_char_height;
       }
       else if (_encoding != '\r')
@@ -2241,7 +2241,7 @@ size_t Arduino_GFX::write(uint8_t c)
           {
             if (wrap && ((cursor_x + (textsize_x * _u8g2_char_width) - 1) > _max_x))
             {
-              cursor_x = 0;
+              cursor_x = fixed_X;
               cursor_y += (int16_t)textsize_y * _u8g2_max_char_height;
             }
           }
@@ -2257,14 +2257,14 @@ size_t Arduino_GFX::write(uint8_t c)
   {
     if (c == '\n')
     {                             // Newline?
-      cursor_x = 0;               // Reset x to zero,
+      cursor_x = fixed_X;               // Reset x to zero,
       cursor_y += textsize_y * 8; // advance y one line
     }
     else if (c != '\r')
     { // Ignore carriage returns
       if (wrap && ((cursor_x + (textsize_x * 6) - 1) > _max_x))
       {                             // Off right?
-        cursor_x = 0;               // Reset x to zero,
+        cursor_x = fixed_X;               // Reset x to zero,
         cursor_y += textsize_y * 8; // advance y one line
       }
       drawChar(cursor_x, cursor_y, c, textcolor, textbgcolor);
